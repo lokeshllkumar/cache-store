@@ -2,6 +2,7 @@ package cache
 
 import (
 	"time"
+
 	"github.com/lokeshllkumar/cache-store/v1/pkg/types"
 )
 
@@ -11,6 +12,7 @@ func (c *Cache[K, V]) Set(key K, value V, duration time.Duration) {
 	defer c.mu.Unlock()
 
 	item := &types.CacheItem[K, V]{
+		Key:        key,
 		Value:      value,
 		Expiration: time.Now().Add(duration),
 	}
